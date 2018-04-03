@@ -20,6 +20,8 @@ public class SimpleExecutor implements TExecutor {
             return (T) test;
         } catch (SQLException e) {
             e.printStackTrace();
+        }finally {
+
         }
         return null;
     }

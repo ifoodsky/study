@@ -8,5 +8,7 @@ public class BootStrap {
         TestMapper testMapper = sqlSession.getMapper(TestMapper.class);
         Test test = testMapper.selectById(1);
         System.out.println(test);
+        Test tempTest = testMapper.selectByName("张三");
+        System.out.println(tempTest);
     }
 }

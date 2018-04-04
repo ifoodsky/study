@@ -7,6 +7,7 @@
 给key添加一个占位标记<br />
 3.MyBatis的plugin实现机制<br />
 对Executor、StatementHandler、PameterHandler、ResultSetHandler生成代理对象plugin,具体实现如下图<br />
+ ![Alt text](https://raw.githubusercontent.com/ifoodsky/study/master/源码专题/Mybatis/源码分析/mybatis-plugin.jpg)
 4.lazy loading 是怎么做到的？<br />
 2018/04/01<br />
 1. 手写1.0<br />

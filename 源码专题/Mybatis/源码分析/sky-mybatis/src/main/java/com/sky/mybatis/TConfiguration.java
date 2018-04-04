@@ -3,6 +3,7 @@ package com.sky.mybatis;
 import com.sky.mybatis.annotation.TSelect;
 
 import java.lang.annotation.Annotation;
+import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -18,11 +19,20 @@ public class TConfiguration {
     static class TestMapperXml {
         public static final String namespace = "com.sky.mybatis.TestMapper";
         public static final Map<String, String> sqlMapperMap = new HashMap<String, String>();
-        public static final Set<Class<? extends Annotation>> sqlTypeSet = new HashSet<Class<? extends Annotation>>();
 
         static {
             sqlMapperMap.put("selectById", "select * from test where id = %d");
-            sqlTypeSet.add(TSelect.class);
+            try {
+                Class clazz = Class.forName(namespace);
+                for (Method m : clazz.getMethods()) {
+                    if(m.isAnnotationPresent(TSelect.class)) {
+                        sqlMapperMap.put(m.getName(), m.getAnnotation(TSelect.class).value());
+                    }
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
+
     }
 }
